@@ -6,7 +6,7 @@
         <form action="" method="POST">
             {% csrf_token %}
             <label for="fname">To Do: </label>
-            <input type="text" id="title" name="title" value="{{form}}" placeholder="Add your To do">
+            <input type="text" id="title" name="title" value="{{form.task}}" placeholder="Add your To do">
             <input type="submit" value="Submit">
         </form> 
     </div>
@@ -15,8 +15,8 @@
         {% for task in tasks %}
             <div style="display: flex;">
                 <h4> {{task}} 
-                    <a class="material-icons" href="{% url 'index_delete' task.id %}">delete</a> 
-                    <a class="material-icons" href="{% url 'index_update' task.id %}">update</a>
+                    <a class="material-icons" method="delete" href="{% url 'index_delete' task.id %}">delete</a> 
+                    <a class="material-icons" method="POST" href="{% url 'index_update' task.id %}">update</a>
                 </h4> 
             </div>
         {%endfor%}

@@ -22,8 +22,19 @@ def index(request):
 
 def delete(request, pk):
     task = Task.objects.get(id=pk)
-    task.delete()
-    return redirect('index')
+    form = Todo(instance = task)
+
+    if request.method == "DELETE":
+        task.delete()
+        return redirect('index')
+    
+    elif request.method == "POST":
+        # form = Todo(instance = task)
+        print(task)
+        return redirect('index')
+         
+    context = {'form':form}
+    return render(request, 'ToDo_app/list.html', context)
 
 def update(request, pk):
     task = Task.objects.get(id=pk)
